@@ -74,17 +74,17 @@ class OTelLogOutput extends logger_lib.LogOutput {
     final origin = event.origin;
     if (origin.error != null) {
       attrs.add(OTel.attributeString(
-        'exception.type',
+        ExceptionAttributes.exceptionType.key,
         origin.error.runtimeType.toString(),
       ));
       attrs.add(OTel.attributeString(
-        'exception.message',
+        ExceptionAttributes.exceptionMessage.key,
         origin.error.toString(),
       ));
     }
     if (_includeStackTrace && origin.stackTrace != null) {
       attrs.add(OTel.attributeString(
-        'exception.stacktrace',
+        ExceptionAttributes.exceptionStacktrace.key,
         origin.stackTrace.toString(),
       ));
     }
