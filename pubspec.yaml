@@ -3,7 +3,7 @@ description: >-
   OpenTelemetry instrumentation for `package:logger`. A `LogOutput` that
   mirrors every log event into the OTel logs pipeline, carrying `trace_id`
   and `span_id` from the active span.
-version: 0.2.0-wip
+version: 0.2.0
 repository: https://github.com/dartastic/otel_logger
 homepage: https://dartastic.io
 
