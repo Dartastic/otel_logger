@@ -1,7 +1,7 @@
 // Licensed under the Apache License, Version 2.0
 // Copyright 2025, Mindful Software LLC, All rights reserved.
 
-import 'package:dartastic_opentelemetry/dartastic_opentelemetry.dart';
+import 'package:dartastic_opentelemetry_api/dartastic_opentelemetry_api.dart';
 import 'package:logger/logger.dart' as logger_lib;
 
 import 'logger_suppression.dart';
@@ -53,37 +53,37 @@ class OTelLogOutput extends logger_lib.LogOutput {
   ///   `LogEvent.stackTrace` is not added as an attribute. Defaults
   ///   to `true`.
   OTelLogOutput({
-    LoggerProvider? loggerProvider,
+    APILoggerProvider? loggerProvider,
     String loggerName = 'package.logger',
     bool includeStackTrace = true,
   })  : _provider = loggerProvider,
         _loggerName = loggerName,
         _includeStackTrace = includeStackTrace;
 
-  final LoggerProvider? _provider;
+  final APILoggerProvider? _provider;
   final String _loggerName;
   final bool _includeStackTrace;
 
   @override
   void output(logger_lib.OutputEvent event) {
     if (loggerInstrumentationSuppressed()) return;
-    final provider = _provider ?? OTel.loggerProvider();
+    final provider = _provider ?? OTelAPI.loggerProvider();
     final otelLogger = provider.getLogger(_loggerName);
 
     final attrs = <Attribute<Object>>[];
     final origin = event.origin;
     if (origin.error != null) {
-      attrs.add(OTel.attributeString(
+      attrs.add(OTelAPI.attributeString(
         ExceptionAttributes.exceptionType.key,
         origin.error.runtimeType.toString(),
       ));
-      attrs.add(OTel.attributeString(
+      attrs.add(OTelAPI.attributeString(
         ExceptionAttributes.exceptionMessage.key,
         origin.error.toString(),
       ));
     }
     if (_includeStackTrace && origin.stackTrace != null) {
-      attrs.add(OTel.attributeString(
+      attrs.add(OTelAPI.attributeString(
         ExceptionAttributes.exceptionStacktrace.key,
         origin.stackTrace.toString(),
       ));
@@ -94,7 +94,7 @@ class OTelLogOutput extends logger_lib.LogOutput {
       severityNumber: _mapLevel(event.level),
       severityText: event.level.name,
       body: event.lines.join('\n'),
-      attributes: attrs.isEmpty ? null : OTel.attributes(attrs),
+      attributes: attrs.isEmpty ? null : OTelAPI.attributes(attrs),
     );
   }
 }
