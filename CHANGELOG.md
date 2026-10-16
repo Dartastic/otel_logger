@@ -4,6 +4,7 @@
 
 ### Changed
 
+- README: standard header naming the instrumented library, its supported platforms and project links; pubspec description to match.
 - Requires `dartastic_opentelemetry_api >=1.0.0-rc.4 <1.0.0-rc.5`.
 - **Breaking:** depends on `dartastic_opentelemetry_api` only, no
   longer on the SDK. The application chooses and initializes the
