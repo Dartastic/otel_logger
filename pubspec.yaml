@@ -1,8 +1,7 @@
 name: otel_logger
 description: >-
-  OpenTelemetry instrumentation for `package:logger`. A `LogOutput` that
-  mirrors every log event into the OTel logs pipeline, carrying `trace_id`
-  and `span_id` from the active span.
+  OpenTelemetry instrumentation for logger by Dartastic.io. Adds standard
+  OpenTelemetry observability to applications that use logger.
 version: 0.3.0-wip
 repository: https://github.com/dartastic/otel_logger
 homepage: https://dartastic.io
